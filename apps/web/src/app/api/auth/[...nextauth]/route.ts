@@ -103,7 +103,3 @@ const authOptions: NextAuthOptions = {
 const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };
-
-// For server-side usage in other API routes or server components
-// Export authOptions separately (not as default Route export)
-export { authOptions };

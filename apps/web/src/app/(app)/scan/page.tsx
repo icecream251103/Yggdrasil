@@ -244,7 +244,7 @@ export default function ScanPage() {
     }
   };
 
-  const stopCamera = () => {
+  const stopCamera = useCallback(() => {
     const stream = streamRef.current || (videoRef.current?.srcObject as MediaStream | null);
     if (stream) {
       stream.getTracks().forEach((track) => track.stop());
@@ -255,7 +255,7 @@ export default function ScanPage() {
     streamRef.current = null;
     setCameraActive(false);
     setScanning(false);
-  };
+  }, []);
 
   const fetchProduct = useCallback(async (qrCode: string) => {
     // Try API first
@@ -304,7 +304,7 @@ export default function ScanPage() {
         stopCamera();
       }
     }
-  }, [scanning, fetchProduct]);
+  }, [scanning, fetchProduct, stopCamera]);
 
   useEffect(() => {
     if (scanning && cameraActive) {
