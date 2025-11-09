@@ -7,7 +7,10 @@ export default withAuth(
   },
   {
     callbacks: {
-      authorized: ({ token }) => !!token,
+      authorized: ({ token }) => {
+        // Allow access if token exists
+        return !!token;
+      },
     },
     pages: {
       signIn: '/login',
@@ -18,7 +21,7 @@ export default withAuth(
 // Protect all routes in (app) group
 export const config = {
   matcher: [
-    '/(app)/:path*',
+    '/home/:path*',
     '/catalog/:path*',
     '/scan/:path*',
     '/cart/:path*',
