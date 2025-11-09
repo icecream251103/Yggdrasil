@@ -49,15 +49,21 @@ const authOptions: NextAuthOptions = {
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
+        console.log('[NextAuth] Authorize called with email:', credentials?.email);
+        
         if (!credentials?.email || !credentials?.password) {
+          console.error('[NextAuth] Missing credentials');
           throw new Error('Email và password không được để trống');
         }
 
         const email = credentials.email.toLowerCase().trim();
         const password = String(credentials.password);
 
+        console.log('[NextAuth] Processing login for:', email);
+
         // 1) Happy path for the baked-in demo account
         if (email === 'demo@yggdrasil.io' && password === 'demo123') {
+          console.log('[NextAuth] Demo user login successful');
           return {
             id: '1',
             email,
@@ -70,11 +76,13 @@ const authOptions: NextAuthOptions = {
         // This unlocks the register flow without a real database.
         const MIN_PASS = 5;
         if (password.length < MIN_PASS) {
+          console.error('[NextAuth] Password too short');
           throw new Error(`Mật khẩu tối thiểu ${MIN_PASS} ký tự`);
         }
 
         let user = MOCK_USERS.find((u) => u.email === email);
         if (!user) {
+          console.log('[NextAuth] Creating new user:', email);
           user = {
             id: `${MOCK_USERS.length + 1}`,
             email,
@@ -86,6 +94,7 @@ const authOptions: NextAuthOptions = {
         }
 
         // In MVP we don't enforce password matching for existing records created above.
+        console.log('[NextAuth] Login successful for user:', user.id);
         return {
           id: user.id,
           email: user.email,
@@ -98,6 +107,7 @@ const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
+        console.log('[NextAuth] JWT callback - adding user to token:', user.id);
         token.id = user.id;
         token.email = user.email;
         token.name = user.name;
@@ -106,6 +116,7 @@ const authOptions: NextAuthOptions = {
       return token;
     },
     async session({ session, token }) {
+      console.log('[NextAuth] Session callback - token:', !!token);
       if (session.user) {
         (session.user as any).id = token.id;
         (session.user as any).email = token.email;

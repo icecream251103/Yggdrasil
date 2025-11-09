@@ -18,14 +18,32 @@ export default function LoginPage() {
     e.preventDefault();
     setError('');
     setLoading(true);
+    
+    console.log('[Login] Attempting login with:', email);
+    
     try {
-      const result = await signIn('credentials', { email, password, redirect: false });
-      if (result?.error) setError(result.error);
-      else if (result?.ok) {
+      const result = await signIn('credentials', { 
+        email, 
+        password, 
+        redirect: false,
+        callbackUrl: '/home'
+      });
+      
+      console.log('[Login] SignIn result:', result);
+      
+      if (result?.error) {
+        console.error('[Login] Error:', result.error);
+        setError(result.error);
+      } else if (result?.ok) {
+        console.log('[Login] Success! Redirecting...');
         router.push('/home');
         router.refresh();
+      } else {
+        console.error('[Login] Unexpected result:', result);
+        setError('Đã xảy ra lỗi không xác định. Vui lòng thử lại.');
       }
     } catch (err) {
+      console.error('[Login] Exception:', err);
       setError('Đã xảy ra lỗi. Vui lòng thử lại.');
     } finally {
       setLoading(false);
