@@ -27,115 +27,52 @@ function getAuthSecret(): string {
   return 'unsafe-fallback-secret-please-set-nextauth-secret';
 }
 
-// Mock user database (MVP only - replace with real DB later)
-// Note: In the dev server this is in-memory and resets on restart.
-const MOCK_USERS: Array<{ id: string; email: string; name: string; wallet_address: string | null; password?: string }>= [
-  {
-    id: '1',
-    email: 'demo@yggdrasil.io',
-    // For MVP we don't verify this hash; we accept the plain password below.
-    name: 'Demo User',
-    wallet_address: null,
-    password: 'demo123',
-  },
-];
-
 const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
-        email: { label: 'Email', type: 'email', placeholder: 'demo@yggdrasil.io' },
+        email: { label: 'Email', type: 'email' },
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
-        console.log('[NextAuth] Authorize called with email:', credentials?.email);
-        
+        // Simple validation - accept demo account or any email with password > 5 chars
         if (!credentials?.email || !credentials?.password) {
-          console.error('[NextAuth] Missing credentials');
-          throw new Error('Email và password không được để trống');
+          return null;
         }
 
         const email = credentials.email.toLowerCase().trim();
-        const password = String(credentials.password);
+        const password = credentials.password;
 
-        console.log('[NextAuth] Processing login for:', email);
-
-        // 1) Happy path for the baked-in demo account
+        // Demo account
         if (email === 'demo@yggdrasil.io' && password === 'demo123') {
-          console.log('[NextAuth] Demo user login successful');
           return {
             id: '1',
-            email,
+            email: 'demo@yggdrasil.io',
             name: 'Demo User',
-            wallet_address: null,
-          } as any;
-        }
-
-        // 2) MVP fallback: accept any non-empty credentials and create an in-memory user
-        // This unlocks the register flow without a real database.
-        const MIN_PASS = 5;
-        if (password.length < MIN_PASS) {
-          console.error('[NextAuth] Password too short');
-          throw new Error(`Mật khẩu tối thiểu ${MIN_PASS} ký tự`);
-        }
-
-        let user = MOCK_USERS.find((u) => u.email === email);
-        if (!user) {
-          console.log('[NextAuth] Creating new user:', email);
-          user = {
-            id: `${MOCK_USERS.length + 1}`,
-            email,
-            name: email.split('@')[0] || 'User',
-            wallet_address: null,
-            password,
           };
-          MOCK_USERS.push(user);
         }
 
-        // In MVP we don't enforce password matching for existing records created above.
-        console.log('[NextAuth] Login successful for user:', user.id);
-        return {
-          id: user.id,
-          email: user.email,
-          name: user.name,
-          wallet_address: user.wallet_address,
-        } as any;
+        // Accept any other email with password >= 5 chars
+        if (password.length >= 5) {
+          return {
+            id: Date.now().toString(),
+            email: email,
+            name: email.split('@')[0],
+          };
+        }
+
+        return null;
       },
     }),
   ],
-  callbacks: {
-    async jwt({ token, user }) {
-      if (user) {
-        console.log('[NextAuth] JWT callback - adding user to token:', user.id);
-        token.id = user.id;
-        token.email = user.email;
-        token.name = user.name;
-        token.wallet_address = (user as any).wallet_address;
-      }
-      return token;
-    },
-    async session({ session, token }) {
-      console.log('[NextAuth] Session callback - token:', !!token);
-      if (session.user) {
-        (session.user as any).id = token.id;
-        (session.user as any).email = token.email;
-        (session.user as any).name = token.name;
-        (session.user as any).wallet_address = token.wallet_address;
-      }
-      return session;
-    },
-  },
   pages: {
     signIn: '/login',
-    error: '/login',
   },
   session: {
     strategy: 'jwt',
-    maxAge: 7 * 24 * 60 * 60, // 7 days
   },
   secret: getAuthSecret(),
-  debug: process.env.NODE_ENV === 'development',
 };
 
 const handler = NextAuth(authOptions);
