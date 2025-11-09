@@ -97,7 +97,9 @@ const authOptions: NextAuthOptions = {
     strategy: 'jwt',
     maxAge: 7 * 24 * 60 * 60, // 7 days
   },
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: process.env.NEXTAUTH_SECRET || process.env.VERCEL_ENV ? 
+    `fallback-secret-${process.env.VERCEL_GIT_COMMIT_SHA}` : 
+    'dev-secret-please-change-in-production',
 };
 
 const handler = NextAuth(authOptions);
