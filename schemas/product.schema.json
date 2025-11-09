@@ -1,0 +1,160 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Product Schema",
+  "description": "Schema for Yggdrasil product data with ESG metrics",
+  "type": "object",
+  "required": ["id", "qr_code", "name", "brand", "category", "green_score", "carbon_kg", "lifecycle_stages"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique product identifier"
+    },
+    "qr_code": {
+      "type": "string",
+      "description": "QR code value for scanning"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "brand": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string",
+      "enum": ["fashion", "packaging", "electronics", "food", "other"]
+    },
+    "description": {
+      "type": "string"
+    },
+    "model_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL to .glb or .gltf 3D model"
+    },
+    "image_url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "green_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Computed green score (0-100)"
+    },
+    "carbon_kg": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Estimated carbon footprint in kg CO2e"
+    },
+    "scoring_version": {
+      "type": "string",
+      "description": "Version of scoring algorithm",
+      "default": "v1.0"
+    },
+    "lifecycle_stages": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["stage", "title", "description"],
+        "properties": {
+          "stage": {
+            "type": "string",
+            "enum": ["materials", "production", "transport", "use", "end_of_life"]
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "hotspot_position": {
+            "type": "string",
+            "pattern": "^-?\\d+(\\.\\d+)?m -?\\d+(\\.\\d+)?m -?\\d+(\\.\\d+)?m$",
+            "description": "3D position for AR hotspot (x y z in meters)",
+            "example": "0m 0.5m 0m"
+          },
+          "metrics": {
+            "type": "object",
+            "properties": {
+              "score": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 100
+              },
+              "carbon_kg": {
+                "type": "number",
+                "minimum": 0
+              },
+              "details": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "value", "verified"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["certification", "carbon_neutral", "recycled_content", "renewable_energy", "water_saved", "other"]
+          },
+          "value": {
+            "type": "string"
+          },
+          "verified": {
+            "type": "boolean"
+          },
+          "verifier": {
+            "type": "string"
+          },
+          "evidence_url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "issued_date": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      }
+    },
+    "blockchain": {
+      "type": "object",
+      "properties": {
+        "cert_nft_id": {
+          "type": "string"
+        },
+        "cert_tx_hash": {
+          "type": "string"
+        },
+        "network": {
+          "type": "string"
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "created_by": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

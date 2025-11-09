@@ -1,0 +1,87 @@
+{
+  "id": "prod-002",
+  "qr_code": "PROD-002",
+  "name": "Bình Nước Thép Không Gỉ 500ml",
+  "brand": "EcoBottle",
+  "category": "packaging",
+  "description": "Bình nước tái sử dụng từ thép không gỉ 304. Thay thế 1000+ chai nhựa dùng 1 lần. Lớp cách nhiệt chân không giữ lạnh 24h.",
+  "model_url": "https://modelviewer.dev/shared-assets/models/sphere.gltf",
+  "image_url": "https://via.placeholder.com/400x400/1e3a8a/ffffff?text=Steel+Bottle",
+  "green_score": 76,
+  "carbon_kg": 8.5,
+  "scoring_version": "v1.0",
+  "lifecycle_stages": [
+    {
+      "stage": "materials",
+      "title": "Thép Không Gỉ 304",
+      "description": "Sản xuất từ thép 304 grade với 60% hàm lượng tái chế. Bền lâu, không BPA, không độc hại.",
+  "hotspot_position": "0m 0.52m 0.16m",
+      "metrics": {
+        "score": 70,
+        "carbon_kg": 4.2,
+        "details": "Steel production high initial carbon but infinite reuse"
+      }
+    },
+    {
+      "stage": "production",
+      "title": "Nhà Máy Trung Quốc",
+      "description": "Sản xuất tại Quảng Đông với 45% năng lượng tái tạo. Quy trình ép thủy lực tiết kiệm năng lượng.",
+  "hotspot_position": "-0.33m 0.14m 0.15m",
+      "metrics": {
+        "score": 68,
+        "carbon_kg": 2.8,
+        "details": "Mid-range renewable energy mix"
+      }
+    },
+    {
+      "stage": "transport",
+      "title": "Vận Chuyển Biển + Đường Bộ",
+      "description": "Container shipping từ Thâm Quyến → TP.HCM (1600km biển) + truck nội địa (50km).",
+  "hotspot_position": "0.33m 0.14m 0.15m",
+      "metrics": {
+        "score": 75,
+        "carbon_kg": 1.0,
+        "details": "Sea freight efficient for long distance"
+      }
+    },
+    {
+      "stage": "end_of_life",
+      "title": "Tái Chế 100% Thép",
+      "description": "Thép không gỉ tái chế vô hạn không mất chất lượng. Tuổi thọ sản phẩm > 10 năm.",
+  "hotspot_position": "0m -0.1m 0.38m",
+      "metrics": {
+        "score": 95,
+        "carbon_kg": 0.5,
+        "details": "Infinitely recyclable material"
+      }
+    }
+  ],
+  "claims": [
+    {
+      "type": "recycled_content",
+      "value": "60% thép tái chế",
+      "verified": false,
+      "verifier": null,
+      "evidence_url": null,
+      "issued_date": null
+    },
+    {
+      "type": "other",
+      "value": "Thay thế 1000+ chai nhựa dùng 1 lần",
+      "verified": false,
+      "verifier": "Manufacturer claim",
+      "evidence_url": null,
+      "issued_date": "2024-06-01"
+    }
+  ],
+  "blockchain": {
+    "cert_nft_id": null,
+    "cert_tx_hash": null,
+    "network": "base-sepolia"
+  },
+  "metadata": {
+    "created_at": "2024-10-15T14:20:00Z",
+    "updated_at": "2024-11-05T16:45:00Z",
+    "created_by": "admin"
+  }
+}

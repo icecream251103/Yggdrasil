@@ -1,0 +1,95 @@
+{
+  "id": "prod-001",
+  "qr_code": "PROD-001",
+  "name": "Áo Thun Cotton Organic Unisex",
+  "brand": "GreenWear",
+  "category": "fashion",
+  "description": "Áo thun 100% cotton organic từ trang trại chứng nhận GOTS tại Việt Nam. Nhuộm bằng màu thực vật, sản xuất với năng lượng mặt trời.",
+  "model_url": "https://modelviewer.dev/shared-assets/models/Astronaut.glb",
+  "image_url": "https://via.placeholder.com/400x400/2d5016/ffffff?text=Organic+Tee",
+  "green_score": 87,
+  "carbon_kg": 3.2,
+  "scoring_version": "v1.0",
+  "lifecycle_stages": [
+    {
+      "stage": "materials",
+      "title": "Nguyên liệu Cotton Organic",
+      "description": "100% cotton organic từ trang trại chứng nhận GOTS ở Đồng Tháp. Không thuốc trừ sâu, tiết kiệm 91% nước so với cotton thường.",
+  "hotspot_position": "0m 0.55m 0.18m",
+      "metrics": {
+        "score": 90,
+        "carbon_kg": 0.8,
+        "details": "2.1 kg CO2e/kg cotton organic vs 5.3 kg/kg conventional"
+      }
+    },
+    {
+      "stage": "production",
+      "title": "Xưởng May Năng Lượng Mặt Trời",
+      "description": "Nhà máy tại Bình Dương sử dụng 85% năng lượng tái tạo (mặt trời + gió). Hệ thống xử lý nước thải khép kín.",
+  "hotspot_position": "-0.35m 0.2m 0.15m",
+      "metrics": {
+        "score": 85,
+        "carbon_kg": 1.2,
+        "details": "Chứng nhận SA8000, ISO 14001"
+      }
+    },
+    {
+      "stage": "transport",
+      "title": "Vận Chuyển Nội Địa",
+      "description": "Từ xưởng may đến kho phân phối trong nước (< 200km). Sử dụng xe tải tiêu chuẩn Euro 5.",
+  "hotspot_position": "0.35m 0.18m 0.15m",
+      "metrics": {
+        "score": 92,
+        "carbon_kg": 0.6,
+        "details": "Local transport: 200km × 0.062 kg/km × 0.5kg product"
+      }
+    },
+    {
+      "stage": "end_of_life",
+      "title": "Tái Chế & Phân Hủy Sinh Học",
+      "description": "100% cotton phân hủy sinh học. Chương trình thu hồi: trả áo cũ nhận voucher 10%.",
+  "hotspot_position": "0m -0.1m 0.4m",
+      "metrics": {
+        "score": 88,
+        "carbon_kg": 0.6,
+        "details": "Biodegradable + take-back program"
+      }
+    }
+  ],
+  "claims": [
+    {
+      "type": "certification",
+      "value": "GOTS Organic Certified",
+      "verified": true,
+      "verifier": "Control Union Vietnam",
+      "evidence_url": "https://example.com/gots-cert-001.pdf",
+      "issued_date": "2024-08-15"
+    },
+    {
+      "type": "renewable_energy",
+      "value": "85% năng lượng tái tạo trong sản xuất",
+      "verified": true,
+      "verifier": "Internal Audit 2024",
+      "evidence_url": "https://example.com/energy-audit-2024.pdf",
+      "issued_date": "2024-10-01"
+    },
+    {
+      "type": "water_saved",
+      "value": "Tiết kiệm 91% nước so với cotton thường",
+      "verified": true,
+      "verifier": "Textile Exchange",
+      "evidence_url": "https://textileexchange.org/organic-cotton-lca",
+      "issued_date": "2024-01-01"
+    }
+  ],
+  "blockchain": {
+    "cert_nft_id": null,
+    "cert_tx_hash": null,
+    "network": "base-sepolia"
+  },
+  "metadata": {
+    "created_at": "2024-11-01T10:00:00Z",
+    "updated_at": "2024-11-06T08:30:00Z",
+    "created_by": "admin"
+  }
+}

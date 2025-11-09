@@ -1,0 +1,79 @@
+{
+  "id": "prod-003",
+  "qr_code": "PROD-003",
+  "name": "Hộp Đựng Thực Phẩm Nhựa PP",
+  "brand": "QuickBox",
+  "category": "packaging",
+  "description": "Hộp đựng thực phẩm nhựa PP (polypropylene) dùng 1 lần. Giá rẻ nhưng carbon footprint cao, khó tái chế.",
+  "model_url": "https://modelviewer.dev/shared-assets/models/glTF-Sample-Models/2.0/Box/glTF-Binary/Box.glb",
+  "image_url": "https://via.placeholder.com/400x400/7f1d1d/ffffff?text=Plastic+Box",
+  "green_score": 28,
+  "carbon_kg": 15.3,
+  "scoring_version": "v1.0",
+  "lifecycle_stages": [
+    {
+      "stage": "materials",
+      "title": "Nhựa PP Virgin (Mới 100%)",
+    "description": "Polypropylene từ dầu mỏ, không hàm lượng tái chế. Sản xuất phát thải cao.",
+    "hotspot_position": "0m 0.5m 0.16m",
+      "metrics": {
+        "score": 25,
+        "carbon_kg": 6.0,
+        "details": "Virgin plastic: 6.0 kg CO2e/kg material"
+      }
+    },
+    {
+      "stage": "production",
+      "title": "Nhà Máy Năng Lượng Hóa Thạch",
+      "description": "Sản xuất tại Indonesia, 100% điện từ than đá. Không chứng nhận môi trường.",
+      "hotspot_position": "-0.32m 0.14m 0.15m",
+      "metrics": {
+        "score": 20,
+        "carbon_kg": 5.8,
+        "details": "Coal-powered production, high emissions"
+      }
+    },
+    {
+      "stage": "transport",
+      "title": "Vận Chuyển Hàng Không",
+      "description": "Air freight từ Jakarta → Việt Nam (2400km) để giao nhanh. Carbon footprint rất cao.",
+      "hotspot_position": "0.32m 0.14m 0.15m",
+      "metrics": {
+        "score": 15,
+        "carbon_kg": 2.9,
+        "details": "Air freight: 0.5 kg/km × 2400km × 0.0024kg"
+      }
+    },
+    {
+      "stage": "end_of_life",
+      "title": "Khó Tái Chế, Chủ Yếu Bãi Rác",
+      "description": "PP lý thuyết tái chế được nhưng không có chương trình thu hồi. Hầu hết vào bãi rác hoặc đốt.",
+      "hotspot_position": "0m -0.12m 0.4m",
+      "metrics": {
+        "score": 18,
+        "carbon_kg": 0.6,
+        "details": "Low recycling rate, landfill dominant"
+      }
+    }
+  ],
+  "claims": [
+    {
+      "type": "other",
+      "value": "Food-grade PP, BPA-free",
+      "verified": true,
+      "verifier": "FDA equivalent certification",
+      "evidence_url": "https://example.com/food-safety-cert.pdf",
+      "issued_date": "2024-03-10"
+    }
+  ],
+  "blockchain": {
+    "cert_nft_id": null,
+    "cert_tx_hash": null,
+    "network": "base-sepolia"
+  },
+  "metadata": {
+    "created_at": "2024-09-20T09:15:00Z",
+    "updated_at": "2024-11-04T11:20:00Z",
+    "created_by": "admin"
+  }
+}

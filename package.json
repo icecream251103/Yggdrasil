@@ -1,0 +1,34 @@
+{
+  "name": "yggdrasil-ar",
+  "version": "0.1.0",
+  "private": true,
+  "description": "WebAR + AI + Blockchain anti-greenwashing platform",
+  "workspaces": [
+    "apps/*",
+    "services/*",
+    "contracts"
+  ],
+  "scripts": {
+    "dev:web": "npm run dev --workspace=apps/web",
+    "dev:api": "npm run dev --workspace=services/api",
+    "build:web": "npm run build --workspace=apps/web",
+    "build:api": "npm run build --workspace=services/api",
+    "contracts:compile": "npm run compile --workspace=contracts",
+    "contracts:deploy": "npm run deploy --workspace=contracts",
+    "lint": "npm run lint --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present"
+  },
+  "keywords": [
+    "webAR",
+    "blockchain",
+    "ESG",
+    "greenwashing",
+    "sustainability"
+  ],
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "author": "Yggdrasil Team",
+  "license": "MIT"
+}

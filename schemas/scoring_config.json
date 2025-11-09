@@ -1,0 +1,68 @@
+{
+  "version": "v1.0",
+  "description": "Rule-based scoring configuration for GreenScore calculation",
+  "weights": {
+    "materials": 0.35,
+    "production": 0.30,
+    "transport": 0.20,
+    "end_of_life": 0.15
+  },
+  "materials_scoring": {
+    "organic": 90,
+    "recycled": 85,
+    "sustainable": 80,
+    "conventional": 50,
+    "synthetic": 40,
+    "virgin_plastic": 20
+  },
+  "production_scoring": {
+    "renewable_energy_100": 95,
+    "renewable_energy_50_99": 75,
+    "renewable_energy_1_49": 55,
+    "fossil_fuel": 30,
+    "high_water_usage": -10,
+    "certified_factory": 10
+  },
+  "transport_scoring": {
+    "local_0_500km": 90,
+    "regional_500_2000km": 70,
+    "continental_2000_5000km": 50,
+    "intercontinental_5000plus": 30,
+    "air_freight": -20,
+    "sea_freight": 10
+  },
+  "end_of_life_scoring": {
+    "fully_recyclable": 95,
+    "partially_recyclable": 70,
+    "compostable": 85,
+    "reusable": 90,
+    "landfill": 20,
+    "take_back_program": 15
+  },
+  "carbon_heuristics": {
+    "materials_kg_per_kg": {
+      "organic_cotton": 2.1,
+      "conventional_cotton": 5.3,
+      "polyester": 6.4,
+      "recycled_polyester": 3.2,
+      "leather": 17.0,
+      "plastic": 6.0,
+      "recycled_plastic": 2.5,
+      "glass": 0.9,
+      "aluminum": 8.2,
+      "recycled_aluminum": 0.5
+    },
+    "transport_kg_per_km": {
+      "truck": 0.062,
+      "ship": 0.008,
+      "air": 0.500
+    },
+    "production_base_kg": {
+      "fashion_item": 5.0,
+      "packaging_item": 0.5,
+      "electronics_small": 50.0,
+      "electronics_large": 200.0
+    }
+  },
+  "disclaimer": "This is an estimated scoring model (v1.0) based on heuristics and industry averages. It does not replace independent third-party audits or certifications."
+}
