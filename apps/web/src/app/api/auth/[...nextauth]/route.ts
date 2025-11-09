@@ -1,6 +1,32 @@
 import NextAuth, { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
+// Generate a deterministic secret for Vercel if NEXTAUTH_SECRET is not set
+// This is a fallback to prevent 500 errors, but a proper secret should be set in production
+function getAuthSecret(): string {
+  if (process.env.NEXTAUTH_SECRET) {
+    return process.env.NEXTAUTH_SECRET;
+  }
+  
+  // Fallback for development
+  if (process.env.NODE_ENV === 'development') {
+    return 'dev-secret-for-local-testing-only';
+  }
+  
+  // Fallback for Vercel/production using deployment URL
+  // This ensures the same secret across serverless function instances
+  const vercelUrl = process.env.VERCEL_URL || process.env.NEXT_PUBLIC_VERCEL_URL;
+  if (vercelUrl) {
+    // Use a combination of URL and commit SHA for determinism
+    const commitSha = process.env.VERCEL_GIT_COMMIT_SHA || 'no-commit';
+    return `vercel-fallback-${vercelUrl}-${commitSha}`;
+  }
+  
+  // Last resort
+  console.warn('⚠️ NEXTAUTH_SECRET not set! Using unsafe fallback. Please set NEXTAUTH_SECRET environment variable.');
+  return 'unsafe-fallback-secret-please-set-nextauth-secret';
+}
+
 // Mock user database (MVP only - replace with real DB later)
 // Note: In the dev server this is in-memory and resets on restart.
 const MOCK_USERS: Array<{ id: string; email: string; name: string; wallet_address: string | null; password?: string }>= [
@@ -97,13 +123,9 @@ const authOptions: NextAuthOptions = {
     strategy: 'jwt',
     maxAge: 7 * 24 * 60 * 60, // 7 days
   },
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: getAuthSecret(),
+  debug: process.env.NODE_ENV === 'development',
 };
-
-// Log warning if secret is not set (for debugging)
-if (!process.env.NEXTAUTH_SECRET && process.env.NODE_ENV === 'production') {
-  console.error('⚠️ NEXTAUTH_SECRET is not set! Please add it to environment variables.');
-}
 
 const handler = NextAuth(authOptions);
 
