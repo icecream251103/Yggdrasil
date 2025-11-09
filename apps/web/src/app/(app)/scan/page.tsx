@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useRef, useState, useCallback, Suspense } from 'react';
 import jsQR from 'jsqr';
 import { Camera, X, AlertCircle } from 'lucide-react';
 import ProductViewer from '@/components/ProductViewer';
@@ -42,7 +42,7 @@ interface Claim {
   evidence_url?: string;
 }
 
-export default function ScanPage() {
+function ScanPageContent() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   // Keep the active MediaStream here so we can bind it after the <video> mounts
@@ -500,5 +500,13 @@ export default function ScanPage() {
         <ProductViewer product={product} onBack={resetScan} />
       )}
     </div>
+  );
+}
+
+export default function ScanPage() {
+  return (
+    <Suspense fallback={<div className="flex items-center justify-center min-h-screen"><div className="text-lg">Đang tải...</div></div>}>
+      <ScanPageContent />
+    </Suspense>
   );
 }

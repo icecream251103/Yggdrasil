@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import Image from 'next/image';
 import { Package, TrendingUp, ShoppingCart, Search } from 'lucide-react';
 import { useSearchParams } from 'next/navigation';
@@ -39,7 +39,7 @@ const PRODUCTS = [
   },
 ];
 
-export default function CatalogPage() {
+function CatalogPageContent() {
   const searchParams = useSearchParams();
   const qParam = searchParams?.get('q') ?? '';
   const [searchQuery, setSearchQuery] = useState(qParam);
@@ -182,5 +182,13 @@ export default function CatalogPage() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function CatalogPage() {
+  return (
+    <Suspense fallback={<div className="flex items-center justify-center min-h-screen"><div className="text-lg">Đang tải...</div></div>}>
+      <CatalogPageContent />
+    </Suspense>
   );
 }
