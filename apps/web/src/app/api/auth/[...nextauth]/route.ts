@@ -97,10 +97,13 @@ const authOptions: NextAuthOptions = {
     strategy: 'jwt',
     maxAge: 7 * 24 * 60 * 60, // 7 days
   },
-  secret: process.env.NEXTAUTH_SECRET || process.env.VERCEL_ENV ? 
-    `fallback-secret-${process.env.VERCEL_GIT_COMMIT_SHA}` : 
-    'dev-secret-please-change-in-production',
+  secret: process.env.NEXTAUTH_SECRET,
 };
+
+// Log warning if secret is not set (for debugging)
+if (!process.env.NEXTAUTH_SECRET && process.env.NODE_ENV === 'production') {
+  console.error('⚠️ NEXTAUTH_SECRET is not set! Please add it to environment variables.');
+}
 
 const handler = NextAuth(authOptions);
 
