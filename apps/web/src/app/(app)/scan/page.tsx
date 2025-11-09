@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import jsQR from 'jsqr';
 import { Camera, X, AlertCircle } from 'lucide-react';
 import ProductViewer from '@/components/ProductViewer';
@@ -257,30 +257,7 @@ export default function ScanPage() {
     setScanning(false);
   };
 
-  const scanQRCode = () => {
-    if (!videoRef.current || !canvasRef.current || !scanning) return;
-
-    const video = videoRef.current;
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
-
-    if (video.readyState === video.HAVE_ENOUGH_DATA && ctx) {
-      canvas.width = video.videoWidth;
-      canvas.height = video.videoHeight;
-      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-      const code = jsQR(imageData.data, imageData.width, imageData.height);
-
-      if (code) {
-        console.log('QR detected:', code.data);
-        fetchProduct(code.data);
-        stopCamera();
-      }
-    }
-  };
-
-  const fetchProduct = async (qrCode: string) => {
+  const fetchProduct = useCallback(async (qrCode: string) => {
     // Try API first
     try {
       const res = await fetch(`/api/products/by-qr/${qrCode}`);
@@ -304,7 +281,30 @@ export default function ScanPage() {
     } else {
       setError('Không tìm thấy sản phẩm với mã QR này. Thử PROD-001, PROD-002, hoặc PROD-003.');
     }
-  };
+  }, []);
+
+  const scanQRCode = useCallback(() => {
+    if (!videoRef.current || !canvasRef.current || !scanning) return;
+
+    const video = videoRef.current;
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+
+    if (video.readyState === video.HAVE_ENOUGH_DATA && ctx) {
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const code = jsQR(imageData.data, imageData.width, imageData.height);
+
+      if (code) {
+        console.log('QR detected:', code.data);
+        fetchProduct(code.data);
+        stopCamera();
+      }
+    }
+  }, [scanning, fetchProduct]);
 
   useEffect(() => {
     if (scanning && cameraActive) {
