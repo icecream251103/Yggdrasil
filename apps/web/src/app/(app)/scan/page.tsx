@@ -6,6 +6,8 @@ import { Camera, X, AlertCircle } from 'lucide-react';
 import ProductViewer from '@/components/ProductViewer';
 import { useSearchParams } from 'next/navigation';
 
+export const dynamic = 'force-dynamic';
+
 interface Product {
   id: string;
   qr_code: string;

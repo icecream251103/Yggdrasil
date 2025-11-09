@@ -6,6 +6,8 @@ import { Package, TrendingUp, ShoppingCart, Search } from 'lucide-react';
 import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 
+export const dynamic = 'force-dynamic';
+
 // Sample products from data/
 const PRODUCTS = [
   {
