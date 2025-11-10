@@ -10,6 +10,10 @@ export const metadata: Metadata = {
   title: 'Yggdrasil - Mua Sắm Minh Bạch, Tương Lai Bền Vững',
   description: 'WebAR + AI + Blockchain platform cho minh bạch môi trường sản phẩm',
   keywords: ['webAR', 'blockchain', 'ESG', 'sustainability', 'greenwashing'],
+  icons: {
+    icon: '/favicon.ico',
+    apple: '/logo.png',
+  },
 };
 
 export default function RootLayout({

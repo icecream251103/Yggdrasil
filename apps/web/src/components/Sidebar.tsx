@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { Home, Package, Scan, ShoppingCart, User, Leaf, Menu, X } from 'lucide-react';
 import clsx from 'clsx';
 
@@ -20,6 +20,14 @@ interface SidebarProps {
 
 export default function Sidebar({ collapsed, setCollapsed }: SidebarProps) {
   const pathname = usePathname();
+  const router = useRouter();
+
+  const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    // Force full page reload to switch from (app) layout to (marketing) layout
+    // This is necessary because Next.js maintains layout hierarchy
+    window.location.href = '/';
+  };
 
   return (
     <>
@@ -33,10 +41,15 @@ export default function Sidebar({ collapsed, setCollapsed }: SidebarProps) {
         {/* Logo & Toggle */}
         <div className="flex items-center justify-between p-4 border-b border-slate-200">
           {!collapsed && (
-            <Link href="/home" className="flex items-center gap-2">
-              <Leaf className="w-8 h-8 text-teal-600" />
+            <a href="/" onClick={handleLogoClick} className="flex items-center gap-2 cursor-pointer">
+              <img src="/logo.png" alt="Yggdrasil Logo" className="w-8 h-8 object-contain" />
               <span className="font-extrabold text-xl gradient-text">Yggdrasil</span>
-            </Link>
+            </a>
+          )}
+          {collapsed && (
+            <a href="/" onClick={handleLogoClick} className="flex items-center justify-center w-full cursor-pointer">
+              <img src="/logo.png" alt="Yggdrasil Logo" className="w-8 h-8 object-contain" />
+            </a>
           )}
           <button
             onClick={() => setCollapsed(!collapsed)}

@@ -47,7 +47,10 @@ export default function LoginPage() {
         <div className="relative bg-white rounded-2xl p-8 shadow-xl border border-slate-100 hover:shadow-2xl transition duration-300 will-change-transform hover:-translate-y-0.5">
         {/* Brand */}
         <div className="text-center mb-8">
-          <Link href="/" className="inline-block text-3xl font-extrabold gradient-text">Yggdrasil</Link>
+          <Link href="/" className="inline-flex items-center gap-2 justify-center">
+            <img src="/logo.png" alt="Yggdrasil Logo" className="w-10 h-10 object-contain" />
+            <span className="text-3xl font-extrabold gradient-text">Yggdrasil</span>
+          </Link>
           <p className="text-slate-500 mt-2">Chống tẩy xanh bằng công nghệ</p>
         </div>
 

@@ -1,19 +1,16 @@
 "use client";
 
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Camera, Lightbulb, Shield, Coins, Menu, X } from "lucide-react";
 
 export default function LandingPage() {
   const { status } = useSession();
-  const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  useEffect(() => {
-    if (status === "authenticated") router.push("/home");
-  }, [status, router]);
+  // Allow authenticated users to view landing page
+  // Removed auto-redirect to /home
 
   useEffect(() => {
     // Header scroll effect
@@ -98,15 +95,24 @@ export default function LandingPage() {
       <header id="header" className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
         <div className="container mx-auto px-6 py-4">
           <div className="flex justify-between items-center bg-white/70 backdrop-blur-lg rounded-full px-6 py-3 shadow-sm border border-white/20">
-            <Link href="#" className="text-2xl font-bold gradient-text">Yggdrasil</Link>
+            <Link href="#" className="flex items-center gap-2">
+              <img src="/logo.png" alt="Yggdrasil Logo" className="w-8 h-8 object-contain" />
+              <span className="text-2xl font-bold gradient-text">Yggdrasil</span>
+            </Link>
             <nav className="hidden md:flex space-x-8 items-center">
               <a href="#features" className="text-slate-600 hover:text-teal-600 transition-colors font-medium">Tính năng</a>
               <a href="#how-it-works" className="text-slate-600 hover:text-teal-600 transition-colors font-medium">Cách hoạt động</a>
               <a href="#for-business" className="text-slate-600 hover:text-teal-600 transition-colors font-medium">Cho Doanh nghiệp</a>
             </nav>
-            <Link href="/login" className="hidden md:inline-block bg-teal-500 text-white font-semibold px-5 py-2 rounded-full hover:bg-teal-600 transition-all duration-300 transform hover:scale-105 ripple">
-              Tham gia ngay
-            </Link>
+            {status === 'authenticated' ? (
+              <Link href="/home" className="hidden md:inline-block bg-teal-500 text-white font-semibold px-5 py-2 rounded-full hover:bg-teal-600 transition-all duration-300 transform hover:scale-105 ripple">
+                Về Dashboard
+              </Link>
+            ) : (
+              <Link href="/login" className="hidden md:inline-block bg-teal-500 text-white font-semibold px-5 py-2 rounded-full hover:bg-teal-600 transition-all duration-300 transform hover:scale-105 ripple">
+                Tham gia ngay
+              </Link>
+            )}
             <button onClick={() => setMobileMenuOpen((o) => !o)} className="md:hidden z-30">
               {mobileMenuOpen ? <X className="h-6 w-6 text-slate-800" /> : <Menu className="h-6 w-6 text-slate-800" />}
             </button>
@@ -115,14 +121,23 @@ export default function LandingPage() {
         {mobileMenuOpen && (
           <div className="md:hidden fixed inset-0 bg-slate-800/50 backdrop-blur-sm z-20">
             <div className="w-3/4 max-w-sm h-full bg-white p-8 shadow-xl">
-              <h2 className="text-3xl font-bold gradient-text mb-10">Yggdrasil</h2>
+              <div className="flex items-center gap-3 mb-10">
+                <img src="/logo.png" alt="Yggdrasil Logo" className="w-10 h-10 object-contain" />
+                <h2 className="text-3xl font-bold gradient-text">Yggdrasil</h2>
+              </div>
               <nav className="flex flex-col space-y-6 text-lg">
                 <a href="#features" className="mobile-menu-link text-slate-700 hover:text-teal-600" onClick={() => setMobileMenuOpen(false)}>Tính năng</a>
                 <a href="#how-it-works" className="mobile-menu-link text-slate-700 hover:text-teal-600" onClick={() => setMobileMenuOpen(false)}>Cách hoạt động</a>
                 <a href="#for-business" className="mobile-menu-link text-slate-700 hover:text-teal-600" onClick={() => setMobileMenuOpen(false)}>Cho Doanh nghiệp</a>
-                <Link href="/login" className="mt-4 inline-block bg-teal-500 text-white font-semibold px-6 py-3 rounded-full text-center ripple" onClick={() => setMobileMenuOpen(false)}>
-                  Tham gia ngay
-                </Link>
+                {status === 'authenticated' ? (
+                  <Link href="/home" className="mt-4 inline-block bg-teal-500 text-white font-semibold px-6 py-3 rounded-full text-center ripple" onClick={() => setMobileMenuOpen(false)}>
+                    Về Dashboard
+                  </Link>
+                ) : (
+                  <Link href="/login" className="mt-4 inline-block bg-teal-500 text-white font-semibold px-6 py-3 rounded-full text-center ripple" onClick={() => setMobileMenuOpen(false)}>
+                    Tham gia ngay
+                  </Link>
+                )}
               </nav>
             </div>
           </div>
@@ -248,7 +263,10 @@ export default function LandingPage() {
         <div className="container mx-auto px-6 py-12">
           <div className="grid md:grid-cols-3 gap-8">
             <div>
-              <h1 className="text-2xl font-bold text-white">Yggdrasil</h1>
+              <div className="flex items-center gap-3 mb-2">
+                <img src="/logo.png" alt="Yggdrasil Logo" className="w-10 h-10 object-contain" />
+                <h1 className="text-2xl font-bold text-white">Yggdrasil</h1>
+              </div>
               <p className="mt-2 text-sm text-slate-400">Mua Sắm Minh Bạch, Tương Lai Bền Vững.</p>
             </div>
             <div className="grid grid-cols-2 gap-8 md:col-span-2">
