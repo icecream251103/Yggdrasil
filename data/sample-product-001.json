@@ -5,7 +5,7 @@
   "brand": "GreenWear",
   "category": "fashion",
   "description": "Áo thun 100% cotton organic từ trang trại chứng nhận GOTS tại Việt Nam. Nhuộm bằng màu thực vật, sản xuất với năng lượng mặt trời.",
-  "model_url": "https://modelviewer.dev/shared-assets/models/Astronaut.glb",
+  "model_url": "/models/product1.glb",
   "image_url": "https://via.placeholder.com/400x400/2d5016/ffffff?text=Organic+Tee",
   "green_score": 87,
   "carbon_kg": 3.2,

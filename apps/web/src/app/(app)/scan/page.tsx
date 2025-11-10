@@ -69,7 +69,7 @@ function ScanPageContent() {
         green_score: 85,
         carbon_kg: 1.2,
         scoring_version: 'v1.0',
-        model_url: 'https://modelviewer.dev/shared-assets/models/Astronaut.glb',
+        model_url: '/models/product1.glb',
         lifecycle_stages: [
           {
             stage: 'materials',
@@ -114,7 +114,7 @@ function ScanPageContent() {
         green_score: 72,
         carbon_kg: 2.7,
         scoring_version: 'v1.0',
-        model_url: 'https://modelviewer.dev/shared-assets/models/RobotExpressive.glb',
+        model_url: '/models/product2.glb',
         lifecycle_stages: [
           {
             stage: 'materials',
@@ -158,7 +158,7 @@ function ScanPageContent() {
         green_score: 45,
         carbon_kg: 0.9,
         scoring_version: 'v1.0',
-        model_url: 'https://modelviewer.dev/shared-assets/models/NeilArmstrong.glb',
+        model_url: '/models/product3.glb',
         lifecycle_stages: [
           {
             stage: 'materials',

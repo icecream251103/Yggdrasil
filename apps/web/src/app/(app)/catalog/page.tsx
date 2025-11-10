@@ -17,7 +17,7 @@ const PRODUCTS = [
     score: 87,
     carbon: 3.2,
     price: 350000,
-    image: '/images/products/tshirt.jpg', // placeholder
+    image: '/images/products/product1.jpg',
   },
   {
     id: 'PROD-002',
@@ -26,7 +26,7 @@ const PRODUCTS = [
     score: 76,
     carbon: 8.5,
     price: 280000,
-    image: '/images/products/bottle.jpg',
+    image: '/images/products/product2.jpg',
   },
   {
     id: 'PROD-003',
@@ -35,7 +35,7 @@ const PRODUCTS = [
     score: 28,
     carbon: 15.3,
     price: 150000,
-    image: '/images/products/bag.jpg',
+    image: '/images/products/product3.jpg',
   },
 ];
 
@@ -125,9 +125,23 @@ function CatalogPageContent() {
             key={product.id}
             className="group rounded-xl border border-slate-200 bg-white overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition duration-300"
           >
-            {/* Image Placeholder */}
-            <div className="h-48 bg-slate-100 flex items-center justify-center">
-              <Package className="w-16 h-16 text-slate-500" />
+            {/* Product Image */}
+            <div className="h-48 bg-slate-100 overflow-hidden relative flex items-center justify-center">
+              <img
+                src={product.image}
+                alt={product.name}
+                className="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-300"
+                onError={(e) => {
+                  // Fallback to icon if image fails to load
+                  const target = e.currentTarget as HTMLImageElement;
+                  target.style.display = 'none';
+                  const fallback = target.nextElementSibling as HTMLElement;
+                  if (fallback) fallback.classList.remove('hidden');
+                }}
+              />
+              <div className="hidden absolute inset-0 flex items-center justify-center">
+                <Package className="w-16 h-16 text-slate-400" />
+              </div>
             </div>
 
             {/* Content */}

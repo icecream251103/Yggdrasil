@@ -135,7 +135,7 @@ export default function ProductViewer({
               <model-viewer
                 key={viewerKey}
                 ref={viewerRef}
-                src={product.model_url}
+                src={`${product.model_url}?v=${Date.now()}`}
                 alt={product.name}
                 auto-rotate
                 camera-controls
@@ -157,10 +157,10 @@ export default function ProductViewer({
                   // 1) Head (top center), 2) Left arm, 3) Right arm, 4) Under feet (center)
                   // Keep a small forward offset (z) to avoid intersecting the model.
                   const positions = [
-                    { x: 0.9,  y: 1.7, z: 0.25 }, // head top (higher)
-                    { x: -0.9, y: 0.55, z: 0.25 }, // left arm (higher)
-                    { x: 0.9,  y: 0.55, z: 0.25 }, // right arm (higher)
-                    { x: -0.9,  y: 1.7, z: 0.25 }, // feet (center)
+                    { x: -0.45, y: -0.3, z: 0.25 }, // head top (higher)
+                    { x: -0.45, y: 0.40, z: 0.25 }, // left arm (higher)
+                    { x: 0.45,  y: 0.40, z: 0.25 }, // right arm (higher)
+                    { x: 0.45,  y: -0.3, z: 0.25 }, // feet (center)
                   ];
 
                   return stages.map((stage, i) => {

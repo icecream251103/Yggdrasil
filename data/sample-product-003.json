@@ -5,7 +5,7 @@
   "brand": "QuickBox",
   "category": "packaging",
   "description": "Hộp đựng thực phẩm nhựa PP (polypropylene) dùng 1 lần. Giá rẻ nhưng carbon footprint cao, khó tái chế.",
-  "model_url": "https://modelviewer.dev/shared-assets/models/glTF-Sample-Models/2.0/Box/glTF-Binary/Box.glb",
+  "model_url": "/models/product3.glb",
   "image_url": "https://via.placeholder.com/400x400/7f1d1d/ffffff?text=Plastic+Box",
   "green_score": 28,
   "carbon_kg": 15.3,

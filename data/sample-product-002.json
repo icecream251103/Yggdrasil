@@ -5,7 +5,7 @@
   "brand": "EcoBottle",
   "category": "packaging",
   "description": "Bình nước tái sử dụng từ thép không gỉ 304. Thay thế 1000+ chai nhựa dùng 1 lần. Lớp cách nhiệt chân không giữ lạnh 24h.",
-  "model_url": "https://modelviewer.dev/shared-assets/models/sphere.gltf",
+  "model_url": "/models/product2.glb",
   "image_url": "https://via.placeholder.com/400x400/1e3a8a/ffffff?text=Steel+Bottle",
   "green_score": 76,
   "carbon_kg": 8.5,
