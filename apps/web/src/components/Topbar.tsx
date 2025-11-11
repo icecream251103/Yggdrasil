@@ -31,10 +31,18 @@ export default function Topbar() {
   };
 
   return (
-    <header className="bg-white border-b border-slate-200 px-6 py-4">
+    <header className="bg-white border-b border-slate-200 px-4 sm:px-6 py-3 sm:py-4">
       <div className="flex items-center justify-between">
+        {/* Mobile Logo */}
+        <div className="md:hidden">
+          <a href="/" className="flex items-center gap-2">
+            <img src="/logo.png" alt="Yggdrasil Logo" className="w-6 h-6 sm:w-8 sm:h-8 object-contain" />
+            <span className="font-extrabold text-lg gradient-text">Yggdrasil</span>
+          </a>
+        </div>
+
         {/* Search Bar */}
-        <div className="flex-1 max-w-xl">
+        <div className="flex-1 max-w-xl mx-4 md:mx-0">
           <form
             className="relative"
             onSubmit={(e) => {
@@ -43,13 +51,13 @@ export default function Topbar() {
               router.push(query ? `/catalog?q=${encodeURIComponent(query)}` : '/catalog');
             }}
           >
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-slate-400" />
             <input
               type="search"
               value={q}
               onChange={(e) => setQ(e.target.value)}
-              placeholder="Tìm kiếm sản phẩm..."
-              className="w-full pl-10 pr-10 py-2 bg-white border border-slate-300 rounded-lg text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-teal-400 transition"
+              placeholder="Tìm kiếm..."
+              className="w-full pl-9 sm:pl-10 pr-8 sm:pr-10 py-2 bg-white border border-slate-300 rounded-lg text-sm sm:text-base text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-teal-400 transition"
               aria-label="Tìm kiếm sản phẩm"
             />
             {q && (
@@ -59,7 +67,7 @@ export default function Topbar() {
                 aria-label="Xoá từ khoá"
                 className="absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded hover:bg-slate-100 text-slate-500"
               >
-                <X className="w-4 h-4" />
+                <X className="w-3 h-3 sm:w-4 sm:h-4" />
               </button>
             )}
           </form>
@@ -69,10 +77,10 @@ export default function Topbar() {
         <div className="relative" ref={menuRef}>
           <button
             onClick={() => setShowUserMenu(!showUserMenu)}
-            className="flex items-center gap-3 px-4 py-2 hover:bg-slate-100 rounded-lg transition"
+            className="flex items-center gap-2 sm:gap-3 px-2 sm:px-4 py-2 hover:bg-slate-100 rounded-lg transition"
           >
-            <div className="w-8 h-8 rounded-full bg-teal-500 flex items-center justify-center">
-              <User className="w-5 h-5 text-white" />
+            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-teal-500 flex items-center justify-center">
+              <User className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
             </div>
             <div className="text-left hidden md:block">
               <p className="text-sm font-medium text-slate-900">{session?.user?.name || 'User'}</p>

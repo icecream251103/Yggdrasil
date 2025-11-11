@@ -31,10 +31,10 @@ export default function Sidebar({ collapsed, setCollapsed }: SidebarProps) {
 
   return (
     <>
-      {/* Desktop Sidebar */}
+      {/* Desktop Sidebar - Hidden on mobile */}
       <aside
         className={clsx(
-          'fixed top-0 left-0 h-screen bg-white border-r border-slate-200 transition-all duration-300 z-40',
+          'hidden md:block fixed top-0 left-0 h-screen bg-white border-r border-slate-200 transition-all duration-300 z-40',
           collapsed ? 'w-20' : 'w-72'
         )}
       >
